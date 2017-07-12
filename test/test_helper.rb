@@ -13,7 +13,7 @@ end
 
 WebMock.disable_net_connect!(:allow => "codeclimate.com")
 
-class TestResource < JsonApiClient::Resource
+class TestResource < JsonOrgApiClient::Resource
   self.site = "http://example.com/"
 end
 

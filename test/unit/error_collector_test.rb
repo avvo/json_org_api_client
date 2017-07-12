@@ -103,7 +103,7 @@ class ErrorCollectorTest < MiniTest::Test
     assert_equal "Email address 'bar' is not a valid email address.", error.detail
     assert_equal "/data/attributes/email_address", error.source_pointer
     assert_equal "email_address", error.source_parameter
-    assert error.meta.is_a?(JsonApiClient::MetaData)
+    assert error.meta.is_a?(JsonOrgApiClient::MetaData)
     assert_equal "asdf", error.meta.qwer
 
     error = article.last_result_set.errors.last
@@ -115,7 +115,7 @@ class ErrorCollectorTest < MiniTest::Test
     assert_nil error.detail
     assert_nil error.source_pointer
     assert_nil error.source_parameter
-    assert error.meta.is_a?(JsonApiClient::MetaData)
+    assert error.meta.is_a?(JsonOrgApiClient::MetaData)
   end
 
   def test_can_handle_explicit_null_error_values
@@ -156,10 +156,10 @@ class ErrorCollectorTest < MiniTest::Test
       assert_equal "1337", error.id
 
       assert_equal({}, error.about, nil)
-      assert_equal(nil, error.status, nil)
-      assert_equal(nil, error.code, nil)
-      assert_equal(nil, error.title, nil)
-      assert_equal(nil, error.detail, nil)
+      assert_nil  error.status
+      assert_nil error.code
+      assert_nil error.title
+      assert_nil error.detail
       assert_equal({}, error.source, nil)
       assert_equal({}, error.meta.attributes,nil)
   end

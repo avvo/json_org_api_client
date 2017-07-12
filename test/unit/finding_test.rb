@@ -16,7 +16,7 @@ class FindingTest < MiniTest::Test
       }.to_json)
     articles = Article.find(1)
 
-    assert articles.is_a?(JsonApiClient::ResultSet)
+    assert articles.is_a?(JsonOrgApiClient::ResultSet)
     assert_equal 1, articles.length
 
     article = articles.first
@@ -46,7 +46,7 @@ class FindingTest < MiniTest::Test
       }.to_json)
     articles = Article.find([2,3])
 
-    assert articles.is_a?(JsonApiClient::ResultSet)
+    assert articles.is_a?(JsonOrgApiClient::ResultSet)
     assert_equal 2, articles.length
     assert_equal ["2", "3"], articles.map(&:id)
   end
@@ -72,7 +72,7 @@ class FindingTest < MiniTest::Test
       }.to_json)
     articles = Article.all
 
-    assert articles.is_a?(JsonApiClient::ResultSet)
+    assert articles.is_a?(JsonOrgApiClient::ResultSet)
     assert_equal 2, articles.length
     assert_equal ["2", "3"], articles.map(&:id)
   end

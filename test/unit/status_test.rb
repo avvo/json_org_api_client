@@ -11,7 +11,7 @@ class StatusTest < MiniTest::Test
         }
       }.to_json)
 
-    assert_raises JsonApiClient::Errors::ServerError do
+    assert_raises JsonOrgApiClient::Errors::ServerError do
       User.find(1)
     end
   end
@@ -24,7 +24,7 @@ class StatusTest < MiniTest::Test
       status: 500,
       body: "something irrelevant")
 
-    assert_raises JsonApiClient::Errors::ServerError do
+    assert_raises JsonOrgApiClient::Errors::ServerError do
       User.find(1)
     end
   end
@@ -37,7 +37,7 @@ class StatusTest < MiniTest::Test
       status: 404,
       body: "something irrelevant")
 
-    assert_raises JsonApiClient::Errors::NotFound do
+    assert_raises JsonOrgApiClient::Errors::NotFound do
       User.find(1)
     end
   end
@@ -51,7 +51,7 @@ class StatusTest < MiniTest::Test
         }
       }.to_json)
 
-    assert_raises JsonApiClient::Errors::NotFound do
+    assert_raises JsonOrgApiClient::Errors::NotFound do
       User.find(1)
     end
   end

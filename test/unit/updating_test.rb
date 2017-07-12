@@ -9,7 +9,7 @@ class UpdatingTest < MiniTest::Test
   end
 
   class CallbackTest < TestResource
-    include JsonApiClient::Helpers::Callbacks
+    include JsonOrgApiClient::Helpers::Callbacks
     before_update do
       self.foo = 10
     end

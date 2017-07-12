@@ -3,7 +3,7 @@ require 'test_helper'
 class CreationTest < MiniTest::Test
 
   class CallbackTest < TestResource
-    include JsonApiClient::Helpers::Callbacks
+    include JsonOrgApiClient::Helpers::Callbacks
     before_save do
       self.foo = 10
     end

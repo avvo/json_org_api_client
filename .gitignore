@@ -23,3 +23,5 @@
 Gemfile.lock
 
 /coverage
+.ruby-version
+/.idea

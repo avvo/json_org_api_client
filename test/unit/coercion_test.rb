@@ -76,7 +76,7 @@ class CoercionTest < MiniTest::Test
                   }
                 }.to_json)
     res = CoercionTypes.find(1)
-    assert res.is_a?(JsonApiClient::ResultSet)
+    assert res.is_a?(JsonOrgApiClient::ResultSet)
     validate_coercion_targets res.first
   end
 

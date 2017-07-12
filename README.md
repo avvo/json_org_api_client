@@ -1,17 +1,17 @@
-# JsonApiClient [![Build Status](https://travis-ci.org/chingor13/json_api_client.png)](https://travis-ci.org/chingor13/json_api_client) [![Code Climate](https://codeclimate.com/github/chingor13/json_api_client.png)](https://codeclimate.com/github/chingor13/json_api_client) [![Code Coverage](https://codeclimate.com/github/chingor13/json_api_client/coverage.png)](https://codeclimate.com/github/chingor13/json_api_client)
+# JsonOrgApiClient [![Build Status](https://travis-ci.org/chingor13/json_org_api_client.png)](https://travis-ci.org/chingor13/json_org_api_client) [![Code Climate](https://codeclimate.com/github/chingor13/json_org_api_client.png)](https://codeclimate.com/github/chingor13/json_org_api_client) [![Code Coverage](https://codeclimate.com/github/chingor13/json_org_api_client/coverage.png)](https://codeclimate.com/github/chingor13/json_org_api_client)
 
 This gem is meant to help you build an API client for interacting with REST APIs as laid out by [http://jsonapi.org](http://jsonapi.org). It attempts to give you a query building framework that is easy to understand (it is similar to ActiveRecord scopes).
 
-*Note: master is currently tracking the 1.0.0 specification. If you're looking for the older code, see [0.x branch](https://github.com/chingor13/json_api_client/tree/0.x)*
+*Note: master is currently tracking the 1.0.0 specification. If you're looking for the older code, see [0.x branch](https://github.com/chingor13/json_org_api_client/tree/0.x)*
 
 ## Usage
 
-You will want to create your own resource classes that inherit from `JsonApiClient::Resource` similar to how you would create an `ActiveRecord` class. You may also want to create your own abstract base class to share common behavior. Additionally, you will probably want to namespace your models. Namespacing your model will not affect the url routing to that resource.
+You will want to create your own resource classes that inherit from `JsonOrgApiClient::Resource` similar to how you would create an `ActiveRecord` class. You may also want to create your own abstract base class to share common behavior. Additionally, you will probably want to namespace your models. Namespacing your model will not affect the url routing to that resource.
 
 ```ruby
 module MyApi
   # this is an "abstract" base class that
-  class Base < JsonApiClient::Resource
+  class Base < JsonOrgApiClient::Resource
     # set the api base url in an abstract base class
     self.site = "http://example.com/"
   end
@@ -53,14 +53,14 @@ u = MyApi::Person.create(
 )
 ```
 
-All class level finders/creators should return a `JsonApiClient::ResultSet` which behaves like an Array and contains extra data about the api response.
+All class level finders/creators should return a `JsonOrgApiClient::ResultSet` which behaves like an Array and contains extra data about the api response.
 
 
 ## Handling Validation Errors
 
 [See specification](http://jsonapi.org/format/#errors)
 
-Out of the box, `json_api_client` handles server side validation only.
+Out of the box, `json_org_api_client` handles server side validation only.
 
 ```ruby
 User.create(name: "Bob", email_address: "invalid email")
@@ -146,7 +146,7 @@ You can force nested resource paths for your models by using a `belongs_to` asso
 
 ```ruby
 module MyApi
-  class Account < JsonApiClient::Resource
+  class Account < JsonOrgApiClient::Resource
     belongs_to :user
   end
 end
@@ -166,7 +166,7 @@ You can create custom methods on both collections (class method) and members (in
 
 ```ruby
 module MyApi
-  class User < JsonApiClient::Resource
+  class User < JsonOrgApiClient::Resource
     # GET /users/search
     custom_endpoint :search, on: :collection, request_method: :get
 
@@ -258,7 +258,7 @@ articles.pages.last
 
 ### Library compatibility
 
-A `JsonApiClient::ResultSet` object should be paginatable with both `kaminari` and `will_paginate`.
+A `JsonOrgApiClient::ResultSet` object should be paginatable with both `kaminari` and `will_paginate`.
 
 ## Filtering
 
@@ -280,7 +280,7 @@ The added benefit of declaring your schema is that you can access fields before 
 ### Example
 
 ```ruby
-class User < JsonApiClient::Resource
+class User < JsonOrgApiClient::Resource
   property :name, type: :string
   property :is_admin, type: :boolean, default: false
   property :points_accrued, type: :int, default: 0
@@ -392,7 +392,7 @@ end
 
 ##### Specifying an HTTP Proxy
 
-All resources have a class method ```connection_options``` used to pass options to the JsonApiClient::Connection initializer.
+All resources have a class method ```connection_options``` used to pass options to the JsonOrgApiClient::Connection initializer.
 
 ```ruby
 MyApi::Base.connection_options[:proxy] = 'http://proxy.example.com'
@@ -409,7 +409,7 @@ end
 
 ### Custom Parser
 
-You can configure your API client to use a custom parser that implements the `parse` class method.  It should return a `JsonApiClient::ResultSet` instance. You can use it by setting the parser attribute on your model:
+You can configure your API client to use a custom parser that implements the `parse` class method.  It should return a `JsonOrgApiClient::ResultSet` instance. You can use it by setting the parser attribute on your model:
 
 ```ruby
 class MyCustomParser
@@ -419,7 +419,7 @@ class MyCustomParser
   end
 end
 
-class MyApi::Base < JsonApiClient::Resource
+class MyApi::Base < JsonOrgApiClient::Resource
   self.parser = MyCustomParser
 end
 ```
@@ -438,7 +438,7 @@ class MyQueryBuilder
   # … add order, includes, paginate, page, first, build
 end
 
-class MyApi::Base < JsonApiClient::Resource
+class MyApi::Base < JsonOrgApiClient::Resource
   self.query_builder = MyQueryBuilder
 end
 ```
@@ -447,16 +447,16 @@ end
 
 You can customize how your resources find pagination information from the response.
 
-If the [existing paginator](https://github.com/chingor13/json_api_client/blob/master/lib/json_api_client/paginating/paginator.rb) fits your requirements but you don't use the default `page` and `per_page` params for pagination, you can customise the param keys as follows:
+If the [existing paginator](https://github.com/chingor13/json_org_api_client/blob/master/lib/json_org_api_client/paginating/paginator.rb) fits your requirements but you don't use the default `page` and `per_page` params for pagination, you can customise the param keys as follows:
 
 ```ruby
-JsonApiClient::Paginating::Paginator.page_param = "page[number]"
-JsonApiClient::Paginating::Paginator.per_page_param = "page[size]"
+JsonOrgApiClient::Paginating::Paginator.page_param = "page[number]"
+JsonOrgApiClient::Paginating::Paginator.per_page_param = "page[size]"
 ```
 
-Please note that this is a global configuration, so library authors should create a custom paginator that inherits `JsonApiClient::Paginating::Paginator` and configure the custom paginator to avoid modifying global config.
+Please note that this is a global configuration, so library authors should create a custom paginator that inherits `JsonOrgApiClient::Paginating::Paginator` and configure the custom paginator to avoid modifying global config.
 
-If the [existing paginator](https://github.com/chingor13/json_api_client/blob/master/lib/json_api_client/paginating/paginator.rb) does not fit your needs, you can create a custom paginator:
+If the [existing paginator](https://github.com/chingor13/json_org_api_client/blob/master/lib/json_org_api_client/paginating/paginator.rb) does not fit your needs, you can create a custom paginator:
 
 ```ruby
 class MyPaginator
@@ -464,7 +464,7 @@ class MyPaginator
   # implement current_page, total_entries, etc
 end
 
-class MyApi::Base < JsonApiClient::Resource
+class MyApi::Base < JsonOrgApiClient::Resource
   self.paginator = MyPaginator
 end
 ```
@@ -486,13 +486,13 @@ class MyMoneyCaster
   end
 end
    
-JsonApiClient::Schema.register money: MyMoneyCaster
+JsonOrgApiClient::Schema.register money: MyMoneyCaster
 
 ```
 and finally
 
 ```ruby
-class Order < JsonApiClient::Resource
+class Order < JsonOrgApiClient::Resource
   property :total_amount, type: :money
 end
 
@@ -501,4 +501,4 @@ end
 
 ## Changelog
 
-See [changelog](https://github.com/chingor13/json_api_client/blob/master/CHANGELOG.md)
+See [changelog](https://github.com/chingor13/json_org_api_client/blob/master/CHANGELOG.md)

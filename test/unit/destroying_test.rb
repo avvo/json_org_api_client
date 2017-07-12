@@ -3,7 +3,7 @@ require 'test_helper'
 class DestroyingTest < MiniTest::Test
 
   class CallbackTest < TestResource
-    include JsonApiClient::Helpers::Callbacks
+    include JsonOrgApiClient::Helpers::Callbacks
     attr_accessor :foo
     after_destroy do
       self.foo = 10

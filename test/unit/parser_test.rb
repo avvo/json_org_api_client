@@ -15,7 +15,7 @@ class ParserTest < MiniTest::Test
       }.to_json)
     articles = Article.find(1)
 
-    assert articles.is_a?(JsonApiClient::ResultSet)
+    assert articles.is_a?(JsonOrgApiClient::ResultSet)
     assert_equal 1, articles.length
 
     article = articles.first
@@ -53,7 +53,7 @@ class ParserTest < MiniTest::Test
     article = Article.find(1).first
     author = article.author
 
-    assert_equal nil, author
+    assert_nil author
   end
 
 end

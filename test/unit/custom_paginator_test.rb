@@ -2,13 +2,13 @@ require 'test_helper'
 
 class CustomPaginatorTest < MiniTest::Test
 
-  class CustomPaginator < JsonApiClient::Paginating::Paginator
+  class CustomPaginator < JsonOrgApiClient::Paginating::Paginator
     def total_entries
       42
     end
   end
 
-  class Book < JsonApiClient::Resource
+  class Book < JsonOrgApiClient::Resource
     self.site = "http://example.com/"
     self.paginator = CustomPaginator
   end
