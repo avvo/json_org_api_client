@@ -4,7 +4,7 @@ class ErrorsTest < MiniTest::Test
 
   def test_connection_errors
     stub_request(:get, "http://example.com/users")
-      .to_raise(Faraday::ConnectionFailed)
+      .to_raise(Errno::ECONNREFUSED)
 
     assert_raises JsonOrgApiClient::Errors::ConnectionError do
       User.all

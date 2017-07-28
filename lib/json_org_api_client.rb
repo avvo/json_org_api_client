@@ -1,5 +1,3 @@
-require 'faraday'
-require 'faraday_middleware'
 require 'json'
 require 'addressable/uri'
 
@@ -17,7 +15,6 @@ module JsonOrgApiClient
   autoload :Relationships, 'json_org_api_client/relationships'
   autoload :LinkDefinition, 'json_org_api_client/link_definition'
   autoload :MetaData, 'json_org_api_client/meta_data'
-  autoload :Middleware, 'json_org_api_client/middleware'
   autoload :Paginating, 'json_org_api_client/paginating'
   autoload :Parsers, 'json_org_api_client/parsers'
   autoload :Query, 'json_org_api_client/query'
