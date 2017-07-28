@@ -349,7 +349,7 @@ end
 
 ### Connections
 
-You can configure your API client to use a custom connection that implementes the `run` instance method. It should return data that your parser can handle. The default connection class wraps Faraday and lets you add middleware.
+You can configure your API client to use a custom connection that implementes the `run` instance method. It should return data that your parser can handle.
 
 ```ruby
 class NullConnection
@@ -358,52 +358,10 @@ class NullConnection
 
   def run(request_method, path, params = {}, headers = {})
   end
-
-  def use(*args); end
 end
 
 class CustomConnectionResource < TestResource
   self.connection_class = NullConnection
-end
-```
-
-#### Connection Options
-
-You can configure your connection using Faraday middleware. In general, you'll want
-to do this in a base model that all your resources inherit from:
-
-```ruby
-MyApi::Base.connection do |connection|
-  # set OAuth2 headers
-  connection.use FaradayMiddleware::OAuth2, 'MYTOKEN'
-
-  # log responses
-  connection.use Faraday::Response::Logger
-
-  connection.use MyCustomMiddleware
-end
-
-module MyApi
-  class User < Base
-    # will use the customized connection
-  end
-end
-```
-
-##### Specifying an HTTP Proxy
-
-All resources have a class method ```connection_options``` used to pass options to the JsonOrgApiClient::Connection initializer.
-
-```ruby
-MyApi::Base.connection_options[:proxy] = 'http://proxy.example.com'
-MyApi::Base.connection do |connection|
-  # ...
-end
-
-module MyApi
-  class User < Base
-    # will use the customized connection with proxy
-  end
 end
 ```
 
