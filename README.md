@@ -4,6 +4,21 @@ This gem is meant to help you build an API client for interacting with REST APIs
 
 *Note: master is currently tracking the 1.0.0 specification. If you're looking for the older code, see [0.x branch](https://github.com/chingor13/json_org_api_client/tree/0.x)*
 
+## Installation
+
+Install json_org_api_client from the command line:
+
+    $ gem install intransient_capybara --source https://packagecloud.io/avvo/gems
+or within a Gemfile:
+
+    source 'https://packagecloud.io/avvo/gems' do
+      gem 'json_org_api_client'
+    end
+
+## Development
+
+To push new versions of this gem to the packagecloud repo, a git commit will need to have a tag with a version number (e.g. v0.2.9). When a commit is pushed to Github with a version tag, this will trigger a CircleCI job that will build the gem, run any tests, and push the new gem version to packagecloud.
+
 ## Usage
 
 You will want to create your own resource classes that inherit from `JsonOrgApiClient::Resource` similar to how you would create an `ActiveRecord` class. You may also want to create your own abstract base class to share common behavior. Additionally, you will probably want to namespace your models. Namespacing your model will not affect the url routing to that resource.
@@ -485,7 +500,7 @@ class MyMoneyCaster
     end
   end
 end
-   
+
 JsonOrgApiClient::Schema.register money: MyMoneyCaster
 
 ```

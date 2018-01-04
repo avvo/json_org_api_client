@@ -22,9 +22,9 @@ Gem::Specification.new do |s|
 
   s.license = "MIT"
 
-  s.author = "Jeff Ching"
-  s.email = "ching.jeff@gmail.com"
-  s.homepage = "http://github.com/chingor13/json_org_api_client"
+  s.author = "Infrastructure team"
+  s.email = "Infrastructure@avvo.com"
+  s.homepage = "https://github.com/avvo/json_org_api_client"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir.glob('test/*_test.rb')
