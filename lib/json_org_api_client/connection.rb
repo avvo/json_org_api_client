@@ -6,7 +6,7 @@ module JsonOrgApiClient
     def initialize(options = {})
       site = options.fetch(:site)
       connection_options = options.slice(:proxy, :ssl, :request, :headers, :params)
-      adapter_options = Array(options.fetch(:adapter, Faraday.default_adapter))
+      adapter_options = Array(options.fetch(:adapter, :net_http))
       @faraday = Faraday.new(site, connection_options) do |builder|
         builder.request :json
         builder.use Middleware::JsonRequest
